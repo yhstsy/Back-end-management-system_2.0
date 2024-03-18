@@ -7,13 +7,13 @@
       </el-button>
       <el-breadcrumb separator="/" class="bread">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-
         <el-breadcrumb-item :to="current.path" v-if="current">{{
           current.label
         }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="r-content">
+      <el-button class="theme" color="#626aef" @click="switchThemes">暗黑模式</el-button>
       <el-dropdown>
         <span class="el-dropdown-link">
           <img class="user" :src="getImgSrc('user')" alt="" />
@@ -33,6 +33,7 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import {useDark, useToggle} from '@vueuse/core'
 
 export default {
   setup() {
@@ -57,12 +58,20 @@ export default {
         name:'login',
       })
     };
+
+    const switchThemes=()=>{
+      const isDark=useDark()
+      const toggleDark=useToggle(isDark)
+      toggleDark()
+    }
+
     return {
       // imgSrc
       getImgSrc,
       handleCollapse,
       current,
       handleLoginout,
+      switchThemes,
     };
   },
 };
@@ -92,6 +101,9 @@ header {
   }
 }
 .r-content {
+  .theme{
+    margin:5px 20px 0 20px;
+  }
   .user {
     width: 40px;
     height: 40px;

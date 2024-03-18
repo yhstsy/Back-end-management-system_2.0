@@ -8,6 +8,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import './assets/less/index.less'
 import store from './store'
 import './api/mock.js'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
